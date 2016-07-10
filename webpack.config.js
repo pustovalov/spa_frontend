@@ -1,12 +1,16 @@
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
 
 
 module.exports = {
-    entry: "./src/entry.jsx",
+    entry: [
+      'webpack-hot-middleware/client',
+      './src/entry.jsx'
+    ],
     output: {
-        path: __dirname + "/build",
-        publicPath: "/",
-        filename: "bundle.js"
+        path: path.join(__dirname, 'public'),
+        filename: "bundle.js",
+        publicPath: '/public'
     },
     module: {
         loaders: [
@@ -15,7 +19,7 @@ module.exports = {
               loaders: [
                 "react-hot",
                 "eslint-loader",
-                "jsx"
+                "jsx?harmony"
               ],
               exclude: /node_modules/
             },
@@ -24,12 +28,15 @@ module.exports = {
               exclude: /node_modules/,
               loader: "babel-loader",
               query: {
-                presets: ['es2015', 'react']
+                presets: ['es2015', 'react'],
+                plugins: ['transform-runtime']
               }
             }
         ],
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
     ]
 };
