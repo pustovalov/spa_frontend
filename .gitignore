@@ -1,4 +1,5 @@
 .DS_Store
 node_modules
+webpack.production.config.js
 npm-debug.log
 build

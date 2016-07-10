@@ -3,40 +3,61 @@ var webpack = require('webpack')
 
 
 module.exports = {
-    entry: [
-      'webpack-hot-middleware/client',
-      './src/entry.jsx'
+  // cheap-module-source-map - for production
+  // cheap-module-eval-source-map - for development
+  devtool: 'cheap-module-eval-source-map',
+  entry: [
+    'webpack-hot-middleware/client',
+    './src/index.jsx'
+  ],
+  output: {
+    path: path.join(__dirname, 'public'),
+    filename: 'index.js',
+    publicPath: '/public'
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(), // remove for production
+    new webpack.NoErrorsPlugin()
+    // Minifies/uglifies your code for production
+    // new webpack.optimize.UglifyJsPlugin(),
+    // Tells webpack to omit some things it uses for node environment builds
+    // new webpack.DefinePlugin({
+    //  'process.env': {
+    //    'NODE_ENV': JSON.stringify('production')
+    //  }
+    // })
+  ],
+  module: {
+    preLoaders: [
+      {
+        test: /\.jsx$/,
+        loaders: ['eslint'],
+        include: [
+          path.resolve(__dirname, 'src')
+        ]
+      }
     ],
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: "bundle.js",
-        publicPath: '/public'
-    },
-    module: {
-        loaders: [
-            {
-              test: /\.jsx?$/,
-              loaders: [
-                "react-hot",
-                "eslint-loader",
-                "jsx?harmony"
-              ],
-              exclude: /node_modules/
-            },
-            {
-              test: /\.jsx?$/,
-              exclude: /node_modules/,
-              loader: "babel-loader",
-              query: {
-                presets: ['es2015', 'react'],
-                plugins: ['transform-runtime']
-              }
-            }
+    loaders: [
+      {
+        loaders: ['react-hot', 'jsx?harmony'], // remove react-hot for production
+        include: [
+          path.resolve(__dirname, 'src')
         ],
-    },
-    plugins: [
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+        test: /\.jsx$/
+      },
+      {
+        test: /\.jsx?$/,
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        query: {
+          presets: ['es2015', 'react'],
+          plugins: ['transform-runtime']
+        }
+      }
     ]
-};
+  }
+}
