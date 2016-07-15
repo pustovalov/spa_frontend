@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
 
-export default class App extends Component {
+export default class Post extends Component {
   render() {
     return(
-      <h3>Супер новость</h3>
+      <div key={this.props.id}>
+        <h3>
+          { this.props.name }
+        </h3>
+        <p>
+          { this.props.description }
+        </p>
+      </div>
     )
   }
+}
+
+Post.propTypes = {
+  id: React.PropTypes.number.isRequired,
+  name: React.PropTypes.string.isRequired,
+  description: React.PropTypes.string.isRequired
 }
