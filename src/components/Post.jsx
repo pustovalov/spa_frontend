@@ -5,10 +5,13 @@ export default class Post extends Component {
     return(
       <div key={this.props.id}>
         <h3>
-          { this.props.name }
+          Username: { this.props.username }
         </h3>
         <p>
-          { this.props.description }
+          Title: { this.props.title }
+        </p>
+        <p>
+          Body: { this.props.body }
         </p>
       </div>
     )
@@ -17,6 +20,7 @@ export default class Post extends Component {
 
 Post.propTypes = {
   id: React.PropTypes.number.isRequired,
-  name: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired
+  username: React.PropTypes.string.isRequired,
+  title: React.PropTypes.string.isRequired,
+  body: React.PropTypes.string.isRequired
 }
