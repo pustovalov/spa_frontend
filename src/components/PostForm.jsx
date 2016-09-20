@@ -19,7 +19,7 @@ export default class PostForm extends Component {
   }
 
   addPost(obj){
-    let request = JSON.stringify({post: obj})
+    let data = JSON.stringify(obj)
 
     fetch('http://localhost:3000/api/posts', {
         method: 'post',
@@ -27,7 +27,7 @@ export default class PostForm extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: request
+        body: data
       })
       .then(response => response.json())
       .then(response => {
@@ -48,7 +48,13 @@ export default class PostForm extends Component {
       return
     }
 
-    this.addPost({username: username, title: title, body: body})
+    let post = {
+      username: username,
+      title: title,
+      body: body
+    }
+
+    this.addPost(post)
   }
 
   render() {
