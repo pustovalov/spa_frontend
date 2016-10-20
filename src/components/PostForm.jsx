@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+const BASE_URL = process.env.BASE_URL
 
 export default class PostForm extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export default class PostForm extends Component {
   addPost(obj){
     let data = JSON.stringify(obj)
 
-    fetch('http://localhost:3000/api/posts', {
+    fetch(BASE_URL + '/api/posts', {
         method: 'post',
         headers: {
           'Accept': 'application/json',

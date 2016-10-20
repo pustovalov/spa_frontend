@@ -1,0 +1,11 @@
+language: node_js
+deploy:
+  provider: s3
+  access_key_id: AKIAJ232FY3ELHPN7ATQ
+  secret_access_key:
+    secure: MpUk8eAHqf1A0hCbcIyHzbiwnqsdUwVYI9Ki2FPQrFWqKt7szlx60UhN1iMqlFSlCJ8nxywNCIVdzTfct/vMaRgWrzFK8u1xm8ewrsSX3ZX9gTnV6amYN5Kn9OE7fzKuiLwqv6y+AVNYSTYvPID/tV06UTS04NXuvwoHfJL/jD5zn0HKNrgiPkA2xLQa1YDtfChIbSaA59FCD3XH/UplOFfSrhoZVA3eY9vGpnxZPDOzBl4KppPJ2bSkOOi1twviBXAFoJYoZlh2by96rI+1W/FFv+cXQuRNCeneuxBXSezTR3WXfaYxNARDBpXvhRPC/RrLKuJKHxuiOnMzSukmfPM0yE45JfGmnKhNopePeaQhTizFpo+KYrE+oK2AdRSt9vAg3d9nLURDXeuqQv53h/emGKUhcSSRUIMBm5PRytjY7QAMpDXkujKbsnaAVmxEnqpM/i/HFguLzqByduWN7qeqKftXOjswfIndA3Ntk9eyAmdwopsQIFGVNhzM828lwHjA1xP9qkGs7k+Eqike7pskvPb+AdsfbjED0unS9ttkDn0OKbHp0fApIrHWgqA0tf0V92eUe4RB5M8hi32bhlR/l0lFsCAcLAowtnNxN6kDglDx2Du0E9BEC83NjSramg1UBMch41LrE5bAlkcIcWrMgWuqfGxPKHwLLO/te70=
+  bucket: spafront2016
+  local-dir: public
+  on:
+    repo: pustovalov/spa_frontend
+    branch: cloudfront

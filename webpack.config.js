@@ -13,20 +13,20 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: 'index.js',
-    publicPath: '/public'
+    publicPath: '/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(), // remove for production
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
     // Minifies/uglifies your code for production
     // new webpack.optimize.UglifyJsPlugin(),
     // Tells webpack to omit some things it uses for node environment builds
-    // new webpack.DefinePlugin({
-    //  'process.env': {
-    //    'NODE_ENV': JSON.stringify('production')
-    //  }
-    // })
+    new webpack.DefinePlugin({
+     'process.env': {
+       'BASE_URL': JSON.stringify('http://localhost:3000')
+     }
+    })
   ],
   module: {
     preLoaders: [

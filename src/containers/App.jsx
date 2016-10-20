@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Post from '../components/Post.jsx'
 import PostForm from '../components/PostForm.jsx'
 import 'whatwg-fetch'
-
+const BASE_URL = process.env.BASE_URL
 
 export default class App extends Component {
   componentWillMount() {
@@ -10,7 +10,7 @@ export default class App extends Component {
   }
 
   getData() {
-    fetch('http://localhost:3000/api/posts')
+    fetch(BASE_URL + '/api/posts')
       .then(response => response.json())
       .then(response => {
         this.setState({posts: response.result})
