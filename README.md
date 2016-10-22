@@ -1,4 +1,4 @@
-# Frontend for SPA application
+# Front End for SPA application
 
 ## Run
 
