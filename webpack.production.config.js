@@ -2,11 +2,8 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  // cheap-module-source-map - for production
-  // cheap-module-eval-source-map - for development
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-source-map',
   entry: [
-    'webpack-hot-middleware/client',
     './src/index.jsx'
   ],
   output: {
@@ -16,22 +13,24 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(), // remove for production
     new webpack.NoErrorsPlugin(),
-    // Minifies/uglifies your code for production
-    // new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     // Tells webpack to omit some things it uses for node environment builds
     new webpack.DefinePlugin({
      'process.env': {
-       'BASE_URL': JSON.stringify('http://localhost:3000'),
-       'ENV': JSON.stringify('dev')
+       'BASE_URL': JSON.stringify('http://ec2-54-166-81-61.compute-1.amazonaws.com'),
+       'ENV': JSON.stringify('production')
      }
     })
   ],
   module: {
     preLoaders: [
       {
-        test: /\.jsx$/,
+        test: /\.js$/,
         loaders: ['eslint'],
         include: [
           path.resolve(__dirname, 'src')
@@ -40,7 +39,7 @@ module.exports = {
     ],
     loaders: [
       {
-        loaders: ['react-hot', 'jsx?harmony'], // remove react-hot for production
+        loaders: ['jsx?harmony'],
         include: [
           path.resolve(__dirname, 'src')
         ],

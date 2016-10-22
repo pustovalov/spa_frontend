@@ -3,6 +3,7 @@ import Post from '../components/Post.jsx'
 import PostForm from '../components/PostForm.jsx'
 import 'whatwg-fetch'
 const BASE_URL = process.env.BASE_URL
+const ENV = process.env.ENV
 
 export default class App extends Component {
   componentWillMount() {
