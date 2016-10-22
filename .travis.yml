@@ -10,8 +10,8 @@ before_deploy:
 
 deploy:
   provider: s3
-  access_key_id: S3_KEY_ID
-  secret_access_key: S3_KEY_VALUE
+  access_key_id: $S3_KEY_ID
+  secret_access_key: $S3_KEY_VALUE
   bucket: spafront2016
   local-dir: public
   skip_cleanup: true
