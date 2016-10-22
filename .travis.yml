@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "6.9.1"
+
+install:
+  - npm i -g yarn && yarn
+
+before_deploy:
+  - yarn prod
+
+deploy:
+  provider: s3
+  access_key_id: S3_KEY_ID
+  secret_access_key: S3_KEY_VALUE
+  bucket: spafront2016
+  local-dir: public
+  skip_cleanup: true
+  on:
+    repo: pustovalov/spa_frontend
+    branch: master
