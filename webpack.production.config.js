@@ -22,7 +22,7 @@ module.exports = {
     // Tells webpack to omit some things it uses for node environment builds
     new webpack.DefinePlugin({
      'process.env': {
-       'BASE_URL': JSON.stringify('http://ec2-54-166-81-61.compute-1.amazonaws.com'),
+       'BASE_URL': JSON.stringify('http://spa_backend.pustovalov.net'),
        'ENV': JSON.stringify('production')
      }
     })
