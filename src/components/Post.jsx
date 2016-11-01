@@ -13,6 +13,8 @@ export default class Post extends Component {
         <p>
           Body: { this.props.body }
         </p>
+        <div>
+        </div>
       </div>
     )
   }
