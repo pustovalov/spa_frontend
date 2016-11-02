@@ -11,7 +11,8 @@ import * as PostActions from '../actions/PostActions.js'
 
 function mapDispatchToProps(dispatch) {
   return {
-    onAddPostClick: () => dispatch(PostActions.addPost()),
+    onAddPost: (data) => dispatch(PostActions.addPost(data)),
+    onRemovePost: (id) => dispatch(PostActions.removePost(id)),
     fetchPosts: () => dispatch(PostActions.fetchPosts())
   }
 }
@@ -24,13 +25,12 @@ function mapStateToProps(state) {
 
 class Button extends Component {
   render() {
-    const { onAddPostClick } = this.props
+    const { onAddPost } = this.props
     return (
-      <button onClick={onAddPostClick} className="btn btn-default">Test</button>
+      <button onClick={onAddPost} className="btn btn-default">Test</button>
     )
   }
 }
-
 
 class App extends Component {
   constructor(props) {
@@ -42,6 +42,7 @@ class App extends Component {
   }
 
   handlePostSubmit() {
+    console.log("subbmit")
     this.props.fetchPosts()
   }
 
@@ -49,10 +50,10 @@ class App extends Component {
     return(
       <Provider store={this.props.store}>
         <div>
-          {this.props && this.props.posts.map((post) => {
-            return <Post key={post.id} id={post.id} username={post.username} title={post.title} body={post.body} />
+          {this.props.posts.map((post) => {
+            return <Post key={post.id} id={post.id} username={post.username} title={post.title} body={post.body} removePost={this.props.onRemovePost} />
           })}
-          <PostForm onPostSubmit={this.handlePostSubmit.bind(this)} />
+          <PostForm  addPost={this.props.onAddPost.bind(this)} />
         </div>
       </Provider>
     )

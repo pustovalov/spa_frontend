@@ -13,8 +13,9 @@ export default class Post extends Component {
         <p>
           Body: { this.props.body }
         </p>
-        <div>
-        </div>
+        <button onClick={() => this.props.removePost(this.props.id)} className="btn btn-default">Remove</button>
+        <br />
+        <br />
       </div>
     )
   }

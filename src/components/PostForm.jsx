@@ -22,21 +22,7 @@ export default class PostForm extends Component {
   addPost(obj){
     let data = JSON.stringify(obj)
 
-    fetch(BASE_URL + '/api/posts', {
-        method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: data
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (response.ok) {
-          this.props.onPostSubmit()
-          this.setState({username: '', title: '', body: ''})
-        }
-      })
+    this.props.addPost(data)
   }
 
   handleSubmit (e) {
