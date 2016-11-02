@@ -4,7 +4,8 @@ import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
 
 const middleware = [ thunk ]
-if (process.env.NODE_ENV !== 'production') {
+
+if (process.env.ENV != 'production') {
   middleware.push(createLogger())
 }
 
