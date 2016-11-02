@@ -5,7 +5,6 @@ import Post from '../components/Post.jsx'
 import PostForm from '../components/PostForm.jsx'
 
 import 'whatwg-fetch'
-const BASE_URL = process.env.BASE_URL
 
 import * as PostActions from '../actions/PostActions.js'
 
@@ -23,15 +22,6 @@ function mapStateToProps(state) {
   }
 }
 
-class Button extends Component {
-  render() {
-    const { onAddPost } = this.props
-    return (
-      <button onClick={onAddPost} className="btn btn-default">Test</button>
-    )
-  }
-}
-
 class App extends Component {
   constructor(props) {
     super(props)
@@ -42,7 +32,6 @@ class App extends Component {
   }
 
   handlePostSubmit() {
-    console.log("subbmit")
     this.props.fetchPosts()
   }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-const BASE_URL = process.env.BASE_URL
 
 export default class PostForm extends Component {
   constructor(props) {

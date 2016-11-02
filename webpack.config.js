@@ -29,15 +29,15 @@ module.exports = {
     })
   ],
   module: {
-    // preLoaders: [
-    //   {
-    //     test: /\.jsx$/,
-    //     loaders: ['eslint'],
-    //     include: [
-    //       path.resolve(__dirname, 'src')
-    //     ]
-    //   }
-    // ],
+    preLoaders: [
+      {
+        test: /\.jsx$/,
+        loaders: ['eslint'],
+        include: [
+          path.resolve(__dirname, 'src')
+        ]
+      }
+    ],
     loaders: [
       {
         loaders: ['react-hot', 'jsx?harmony'], // remove react-hot for production
