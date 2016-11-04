@@ -1,5 +1,9 @@
 {
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -8,6 +12,13 @@
   "plugins": [
     "react"
   ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "rules": {
     "no-console": 0,
     "new-cap": 0,

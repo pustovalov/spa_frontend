@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router'
 
 export default class Post extends Component {
   render() {
     return(
       <div key={this.props.id}>
-        <h3>
-          Username: { this.props.username }
-        </h3>
+        { this.props.link ?
+          <h3>
+            <Link to={"/posts/" + this.props.id}>
+              Title: { this.props.title }
+            </Link>
+          </h3>
+        :
+          <h3>
+            Title: { this.props.title }
+          </h3>
+        }
         <p>
-          Title: { this.props.title }
+          Username: { this.props.username }
         </p>
         <p>
           Body: { this.props.body }
