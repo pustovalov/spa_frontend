@@ -39,7 +39,6 @@ export const removePost = id => dispatch => {
     })
     .then(response => response.json())
     .then(response => {
-      console.log("response", response)
       if (response.ok) {
         dispatch(fetchPosts())
       }
