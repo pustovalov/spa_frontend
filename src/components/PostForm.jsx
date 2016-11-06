@@ -3,19 +3,17 @@ import React, { Component } from 'react'
 export default class PostForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {username: '', title: '', body: ''}
+    this.state = {username: '', title: '', body: '', submitAllowed: false}
+    this.handleChangeInput = this.handleChangeInput.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNameChange (e) {
-    this.setState({username: e.target.value})
-  }
-
-  handleTitleChange (e) {
-    this.setState({title: e.target.value})
-  }
-
-  handleBodyChange (e) {
-    this.setState({body: e.target.value})
+  handleChangeInput () {
+    let allowed = false
+    if (this.refs.username.value.trim() && this.refs.title.value.trim() && this.refs.body.value.trim()) {
+      allowed = true
+    }
+    this.setState({submitAllowed: allowed})
   }
 
   addPost(obj){
@@ -26,9 +24,9 @@ export default class PostForm extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    let username = this.state.username.trim()
-    let title = this.state.title.trim()
-    let body = this.state.body.trim()
+    let username = this.refs.username.value.trim()
+    let title = this.refs.title.value.trim()
+    let body = this.refs.body.value.trim()
 
     if (!title || !username || !body) {
       return
@@ -47,30 +45,30 @@ export default class PostForm extends Component {
     return(
       <div className="row">
         <div className="col-md-2">
-          <form className="commentForm" onSubmit={this.handleSubmit.bind(this)}>
+          <form className="commentForm" onSubmit={this.handleSubmit}>
 
             <div className="form-group">
               <input className="form-control"
-                     type="title"
-                     value={this.state.username}
+                     type="text"
                      placeholder="Your username"
-                     onChange={this.handleNameChange.bind(this)} />
+                     ref="username"
+                     onChange={this.handleChangeInput} />
             </div>
             <div className="form-group">
-              <input type="title"
+              <input type="text"
                      className="form-control"
-                     value={this.state.title}
                      placeholder="Title"
-                     onChange={this.handleTitleChange.bind(this)} />
+                     ref="title"
+                     onChange={this.handleChangeInput} />
             </div>
             <div className="form-group">
-              <input type="title"
+              <input type="text"
                      className="form-control"
-                     value={this.state.body}
                      placeholder="Body"
-                     onChange={this.handleBodyChange.bind(this)} />
+                     ref="body"
+                     onChange={this.handleChangeInput} />
             </div>
-            <input type="submit" className="btn btn-default" value="Add comment" />
+            <input type="submit" className={ "btn btn-default" + (this.state.submitAllowed ? '' : ' disabled') } value="Add comment" />
           </form>
         </div>
       </div>
