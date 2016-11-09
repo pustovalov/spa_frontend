@@ -1,0 +1,26 @@
+.form-signin {
+  margin: 0 auto;
+  max-width: 330px;
+
+  .form-control {
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    height: auto;
+  }
+
+  .first {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .second {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}

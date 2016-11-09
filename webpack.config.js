@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   // cheap-module-source-map - for production
@@ -16,11 +16,8 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(), // remove for production
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    // Minifies/uglifies your code for production
-    // new webpack.optimize.UglifyJsPlugin(),
-    // Tells webpack to omit some things it uses for node environment builds
     new webpack.DefinePlugin({
      'process.env': {
        'BASE_URL': JSON.stringify('http://localhost:3000'),
@@ -29,22 +26,26 @@ module.exports = {
     })
   ],
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx$/,
-        loaders: ['eslint'],
-        include: [
-          path.resolve(__dirname, 'src')
-        ]
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx$/,
+    //     loaders: ['eslint'],
+    //     include: [
+    //       path.resolve(__dirname, 'src')
+    //     ]
+    //   }
+    // ],
     loaders: [
       {
-        loaders: ['react-hot', 'jsx?harmony'], // remove react-hot for production
+        loaders: ['react-hot', 'jsx?harmony'],
         include: [
           path.resolve(__dirname, 'src')
         ],
         test: /\.jsx$/
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.jsx?$/,
