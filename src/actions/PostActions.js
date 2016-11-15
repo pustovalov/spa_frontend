@@ -8,13 +8,13 @@ export const receivePosts = posts => ({
 })
 
 export const fetchPosts = posts => dispatch => {
-  return fetch(BASE_URL + '/api/posts')
+  return fetch(`${BASE_URL}/api/posts`)
     .then(response => response.json())
     .then(response => dispatch(receivePosts(response.result)))
 }
 
 export const addPost = data => dispatch => {
-  fetch(BASE_URL + '/api/posts', {
+  fetch(`${BASE_URL}/api/posts`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -31,7 +31,7 @@ export const addPost = data => dispatch => {
 }
 
 export const removePost = id => dispatch => {
-  fetch(BASE_URL + '/api/posts/' + id, {
+  fetch(`${BASE_URL}/api/posts/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
