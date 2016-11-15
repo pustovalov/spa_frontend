@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Provider, connect } from 'react-redux'
+import { connect } from 'react-redux'
 
 import Post from '../components/Post.jsx'
 import PostForm from '../components/PostForm.jsx'
