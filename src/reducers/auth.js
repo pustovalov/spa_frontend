@@ -21,7 +21,6 @@ export default function authReducer(state = initialState, action) {
         isAdmin: false
       }
     case types.LOGIN_SUCCESS:
-      console.log("action", action)
       return {
         ...state,
         isFetching: false,

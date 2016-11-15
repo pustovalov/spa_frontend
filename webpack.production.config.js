@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
@@ -35,6 +35,10 @@ module.exports = {
           path.resolve(__dirname, 'src')
         ],
         test: /\.jsx$/
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
       },
       {
         test: /\.jsx?$/,

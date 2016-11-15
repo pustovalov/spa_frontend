@@ -11,8 +11,6 @@ export default class PostForm extends Component {
   render() {
     const { dispatch, isAuthenticated, userName, isAdmin } = this.props
 
-    console.log("isAdmin", isAdmin)
-
     return(
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container">
