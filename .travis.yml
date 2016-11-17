@@ -30,6 +30,7 @@ deploy:
   on:
     repo: pustovalov/spa_frontend
     branch: master
+    
 
 after_deploy:
   - aws configure set preview.cloudfront true
