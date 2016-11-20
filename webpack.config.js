@@ -21,7 +21,7 @@ module.exports = {
     new webpack.DefinePlugin({
      'process.env': {
        'BASE_URL': JSON.stringify('http://localhost:3000'),
-       'ENV': JSON.stringify('dev')
+       'NODE_ENV': JSON.stringify('dev')
      }
     })
   ],

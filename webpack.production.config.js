@@ -14,16 +14,12 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
+    new webpack.optimize.UglifyJsPlugin(),
     // Tells webpack to omit some things it uses for node environment builds
     new webpack.DefinePlugin({
      'process.env': {
        'BASE_URL': JSON.stringify('http://spa_backend.pustovalov.net'),
-       'ENV': JSON.stringify('production')
+       'NODE_ENV': JSON.stringify('production')
      }
     })
   ],
