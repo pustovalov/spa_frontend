@@ -10,14 +10,18 @@ export const receivePosts = response => ({
   meta: response.meta
 })
 
-export const fetchPosts = options => dispatch => {
-  let page = options && options.page ? options.page : 1
-  let config = {
-    per: NUMBER_PER_PARE,
-    page: page
-  }
+export const paginatePosts = page => ({
+  type: types.PAGINATE_POSTS,
+  page: page
+})
 
-  let params = generateParams(config)
+export const filterPosts = filter => ({
+  type: types.FILTER_POSTS,
+  order: filter
+})
+
+export const fetchPosts = options => dispatch => {
+  let params = generateParams(options)
 
   return fetch(`${BASE_URL}/api/posts?${params}`)
     .then(response => response.json())

@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const generateParams = params => {
   let esc = encodeURIComponent
   let query = Object.keys(params)
@@ -5,3 +7,7 @@ export const generateParams = params => {
                 .join('&')
   return query
 }
+
+export const formatDate = date => (
+  moment(date).format('MMMM Do YYYY, h:mm:ss A')
+)

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import { formatDate } from '../helpers'
 
 export default class Post extends Component {
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return(
       <div key={this.props.id}>
@@ -21,6 +26,9 @@ export default class Post extends Component {
         </p>
         <p>
           Body: { this.props.body }
+        </p>
+        <p>
+          Created at: { formatDate(this.props.createdAt) }
         </p>
         <button onClick={() => this.props.removePost(this.props.id)} className="btn btn-default">Remove</button>
         <br />
