@@ -7,27 +7,23 @@ import PaginatorSection from '../components/PaginatorSection.jsx'
 
 import * as PostActions from '../actions/PostActions.js'
 
-function mapDispatchToProps(dispatch) {
-  return {
-    onAddPost: (data) => dispatch(PostActions.addPost(data)),
-    onRemovePost: (id) => dispatch(PostActions.removePost(id)),
-    onPaginate: (page) => dispatch(PostActions.paginatePosts(page)),
-    onFilter: (options) => dispatch(PostActions.filterPosts(options)),
-    fetchPosts: (options) => dispatch(PostActions.fetchPosts(options))
-  }
+const mapDispatchToProps = {
+  onAddPost: PostActions.addPost,
+  onRemovePost: PostActions.removePost,
+  onPaginate: PostActions.paginatePosts,
+  onFilter: PostActions.filterPosts,
+  fetchPosts: PostActions.fetchPosts
 }
 
-function mapStateToProps(state) {
-  return {
-    posts: state.postReducer.posts,
-    meta: state.postReducer.meta,
-    config: {
-      page: state.postReducer.page,
-      per: state.postReducer.per,
-      order: state.postReducer.order
-    }
+const mapStateToProps = (state) => ({
+  posts: state.postReducer.posts,
+  meta: state.postReducer.meta,
+  config: {
+    page: state.postReducer.page,
+    per: state.postReducer.per,
+    order: state.postReducer.order
   }
-}
+})
 
 class PostsPage extends Component {
   constructor(props) {
@@ -46,16 +42,14 @@ class PostsPage extends Component {
 
   handleOnPaginate (pageNumber) {
     this.props.onPaginate(pageNumber)
-    setTimeout(()=>{
-      this.props.fetchPosts(this.props.config)
-    }, 5);
   }
 
   handleOnSort(option) {
     this.props.onFilter(option)
-    setTimeout(()=>{
-      this.props.fetchPosts(this.props.config)
-    }, 5);
+  }
+
+  activeFilter(filter) {
+    return filter == this.props.config.order ? "btn-primary" : ""
   }
 
   render() {
@@ -64,8 +58,8 @@ class PostsPage extends Component {
         <PostForm addPost={this.props.onAddPost.bind(this)} />
 
         <div className="btn-group mt-2">
-          <button type="button" className="btn btn-default" onClick={this.handleOnSort.bind(this, "ASC")}>Newest</button>
-          <button type="button" className="btn btn-default" onClick={this.handleOnSort.bind(this, "DESC")}>Eldest</button>
+          <button type="button" className={`btn btn-default ${ this.activeFilter('ASC') }`} onClick={this.handleOnSort.bind(this, "ASC")}>Newest</button>
+          <button type="button" className={`btn btn-default ${ this.activeFilter('DESC') }`} onClick={this.handleOnSort.bind(this, "DESC")}>Eldest</button>
         </div>
 
         {this.props.posts.map((post) => {

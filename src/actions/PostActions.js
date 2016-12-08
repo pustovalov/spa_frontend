@@ -10,17 +10,37 @@ export const receivePosts = response => ({
   meta: response.meta
 })
 
-export const paginatePosts = page => ({
-  type: types.PAGINATE_POSTS,
-  page: page
-})
+export const paginatePosts = page => (dispatch, getState) => {
+  dispatch({
+    type: types.PAGINATE_POSTS,
+    page: page
+  })
 
-export const filterPosts = filter => ({
-  type: types.FILTER_POSTS,
-  order: filter
-})
+  let state = getState().postReducer
+  let options = {
+    order: state.order,
+    page: state.page,
+    per: state.per
+  }
+  dispatch(fetchPosts(options))
+}
 
-export const fetchPosts = options => dispatch => {
+export const filterPosts = filter => (dispatch, getState) => {
+  dispatch({
+    type: types.FILTER_POSTS,
+    order: filter
+  })
+
+  let state = getState().postReducer
+  let options = {
+    order: state.order,
+    page: state.page,
+    per: state.per
+  }
+  dispatch(fetchPosts(options))
+}
+
+export const fetchPosts = options => (dispatch, getState) => {
   let params = generateParams(options)
 
   return fetch(`${BASE_URL}/api/posts?${params}`)
