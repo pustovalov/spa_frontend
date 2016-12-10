@@ -4,13 +4,13 @@ const initialPostState = {
   posts: [],
   per: 3,
   page: 1,
-  order: "ASC"
+  order: "ASC",
+  search: ""
 }
 
 export default function postReducer(state = initialPostState, action) {
   switch (action.type) {
     case types.RECEIVE_POSTS:
-      console.log("action", action)
       return {
         ...state,
         posts: action.posts,
@@ -19,8 +19,13 @@ export default function postReducer(state = initialPostState, action) {
     case types.PAGINATE_POSTS:
       return {
         ...state,
-        page: action.page,
-        order: "ASC"
+        page: action.page
+      }
+    case types.SEARCH_POSTS:
+      return {
+        ...state,
+        search: action.search,
+        page: 1
       }
     case types.FILTER_POSTS:
       return {

@@ -21,6 +21,11 @@ export default class Post extends Component {
             Title: { this.props.title }
           </h3>
         }
+        {this.props.image.url &&
+          <div className="mb-1 thumbnail inline-block">
+            <img src={this.props.image.thumb.url} />
+          </div>
+        }
         <p>
           Username: { this.props.username }
         </p>

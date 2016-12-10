@@ -40,6 +40,7 @@ class PostPage extends React.Component {
                   username={post.username}
                   title={post.title}
                   body={post.body}
+                  image={post.image}
                   createdAt={post.created_at}
                   removePost={this.props.onRemovePost} />
 

@@ -12,17 +12,14 @@ const mapDispatchToProps = {
   onRemovePost: PostActions.removePost,
   onPaginate: PostActions.paginatePosts,
   onFilter: PostActions.filterPosts,
+  onSearch: PostActions.searchPosts,
   fetchPosts: PostActions.fetchPosts
 }
 
 const mapStateToProps = (state) => ({
   posts: state.postReducer.posts,
   meta: state.postReducer.meta,
-  config: {
-    page: state.postReducer.page,
-    per: state.postReducer.per,
-    order: state.postReducer.order
-  }
+  order: state.postReducer.order
 })
 
 class PostsPage extends Component {
@@ -30,26 +27,35 @@ class PostsPage extends Component {
     super(props)
 
     this.handleOnPaginate = this.handleOnPaginate.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentWillMount() {
-    this.props.fetchPosts(this.props.config)
+    this.props.fetchPosts()
   }
 
   handlePostSubmit() {
-    this.props.fetchPosts(this.props.config)
+    this.props.fetchPosts()
   }
 
   handleOnPaginate (pageNumber) {
     this.props.onPaginate(pageNumber)
   }
 
-  handleOnSort(option) {
+  handleOnSort(option, e) {
+    e.preventDefault()
     this.props.onFilter(option)
   }
 
   activeFilter(filter) {
-    return filter == this.props.config.order ? "btn-primary" : ""
+    return filter == this.props.order ? "active" : ""
+  }
+
+  handleSubmit (e) {
+    e.preventDefault()
+
+    let query = this.refs.search.value.trim()
+    this.props.onSearch(query)
   }
 
   render() {
@@ -57,21 +63,46 @@ class PostsPage extends Component {
       <div>
         <PostForm addPost={this.props.onAddPost.bind(this)} />
 
-        <div className="btn-group mt-2">
-          <button type="button" className={`btn btn-default ${ this.activeFilter('ASC') }`} onClick={this.handleOnSort.bind(this, "ASC")}>Newest</button>
-          <button type="button" className={`btn btn-default ${ this.activeFilter('DESC') }`} onClick={this.handleOnSort.bind(this, "DESC")}>Eldest</button>
+        <div className="navbar navbar-default mt-3">
+          <div className="container-fluid">
+            <form className="navbar-form navbar-left" onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <input className="form-control" ref="search" placeholder="Search by Title" />
+              </div>
+              <button type="submit" className="ml-1 btn btn-default">Submit</button>
+            </form>
+
+            <ul className="nav navbar-nav">
+              <li className={`${ this.activeFilter("ASC") }`}>
+                <a href="#" onClick={this.handleOnSort.bind(this, "ASC")}>Newest</a>
+              </li>
+              <li className={`${ this.activeFilter("DESC") }`}>
+                <a href="#" onClick={this.handleOnSort.bind(this, "DESC")}>Eldest</a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {this.props.posts.map((post) => {
-          return <Post link={true}
-                       key={post.id}
-                       id={post.id}
-                       username={post.username}
-                       title={post.title}
-                       body={post.body}
-                       createdAt={post.created_at}
-                       removePost={this.props.onRemovePost} />
-        })}
+        {
+          this.props.posts.map((post) => {
+            return <Post link={true}
+                         key={post.id}
+                         id={post.id}
+                         username={post.username}
+                         title={post.title}
+                         body={post.body}
+                         image={post.image}
+                         createdAt={post.created_at}
+                         removePost={this.props.onRemovePost} />
+          })
+        }
+
+        {
+          !this.props.posts.length &&
+          <h3>
+            Not found
+          </h3>
+        }
 
         {this.props.meta &&
           <PaginatorSection onPaginate={this.handleOnPaginate}

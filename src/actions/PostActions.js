@@ -16,13 +16,7 @@ export const paginatePosts = page => (dispatch, getState) => {
     page: page
   })
 
-  let state = getState().postReducer
-  let options = {
-    order: state.order,
-    page: state.page,
-    per: state.per
-  }
-  dispatch(fetchPosts(options))
+  dispatch(fetchPosts())
 }
 
 export const filterPosts = filter => (dispatch, getState) => {
@@ -31,16 +25,27 @@ export const filterPosts = filter => (dispatch, getState) => {
     order: filter
   })
 
+  dispatch(fetchPosts())
+}
+
+export const searchPosts = query => (dispatch, getState) => {
+  dispatch({
+    type: types.SEARCH_POSTS,
+    search: query
+  })
+
+  dispatch(fetchPosts())
+}
+
+export const fetchPosts = () => (dispatch, getState) => {
+
   let state = getState().postReducer
   let options = {
     order: state.order,
     page: state.page,
-    per: state.per
+    per: state.per,
+    search: state.search
   }
-  dispatch(fetchPosts(options))
-}
-
-export const fetchPosts = options => (dispatch, getState) => {
   let params = generateParams(options)
 
   return fetch(`${BASE_URL}/api/posts?${params}`)

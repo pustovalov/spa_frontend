@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 export default class PostForm extends Component {
   constructor(props) {
     super(props)
-    this.state = {username: '', title: '', body: '', submitAllowed: false}
+    this.state = {username: '', title: '', body: '', image: '', submitAllowed: false}
     this.handleChangeInput = this.handleChangeInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangeImage = this.handleChangeImage.bind(this)
   }
 
   handleChangeInput () {
@@ -14,6 +15,16 @@ export default class PostForm extends Component {
       allowed = true
     }
     this.setState({submitAllowed: allowed})
+  }
+
+  handleChangeImage () {
+    let file = this.refs.image.files[0]
+    let reader = new FileReader()
+    let url = reader.readAsDataURL(file)
+
+    reader.onloadend = () => {
+      this.setState({image: reader.result})
+    }
   }
 
   addPost(obj){
@@ -27,6 +38,7 @@ export default class PostForm extends Component {
     let username = this.refs.username.value.trim()
     let title = this.refs.title.value.trim()
     let body = this.refs.body.value.trim()
+    let image = this.state.image
 
     if (!title || !username || !body) {
       return
@@ -35,7 +47,8 @@ export default class PostForm extends Component {
     let post = {
       username: username,
       title: title,
-      body: body
+      body: body,
+      image: image
     }
 
     this.addPost(post)
@@ -44,7 +57,10 @@ export default class PostForm extends Component {
   render() {
     return(
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-3">
+
+          <h3>Add new comment</h3>
+
           <form className="commentForm" onSubmit={this.handleSubmit}>
 
             <div className="form-group">
@@ -67,6 +83,13 @@ export default class PostForm extends Component {
                      placeholder="Body"
                      ref="body"
                      onChange={this.handleChangeInput} />
+            </div>
+            <div className="form-group">
+              <input type="file"
+                     className="form-control"
+                     ref="image"
+                     accept="image/*"
+                     onChange={this.handleChangeImage} />
             </div>
             <input type="submit" className={ "btn btn-default" + (this.state.submitAllowed ? '' : ' disabled') } value="Add comment" />
           </form>
