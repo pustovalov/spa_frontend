@@ -17,7 +17,7 @@ export default class PaginatorSection extends React.Component {
   render() {
     return(
       <div>
-        { this.props.totalPages > 1 ?
+        { this.props.totalPages > 1 &&
           <ul className="pagination">
             {_.range(1, this.props.totalPages).map((i) => {
               return <li key={i} className={ i == this.props.currentPage ? "active" : "" }>
@@ -27,8 +27,6 @@ export default class PaginatorSection extends React.Component {
                      </li>
             })}
           </ul>
-        :
-          <div>&nbsp;</div>
         }
       </div>
     )

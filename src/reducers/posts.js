@@ -4,7 +4,7 @@ const initialPostState = {
   posts: [],
   per: 3,
   page: 1,
-  order: "ASC",
+  order: "DESC",
   search: ""
 }
 

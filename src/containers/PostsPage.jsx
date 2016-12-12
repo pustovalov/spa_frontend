@@ -73,11 +73,11 @@ class PostsPage extends Component {
             </form>
 
             <ul className="nav navbar-nav">
-              <li className={`${ this.activeFilter("ASC") }`}>
-                <a href="#" onClick={this.handleOnSort.bind(this, "ASC")}>Newest</a>
-              </li>
               <li className={`${ this.activeFilter("DESC") }`}>
-                <a href="#" onClick={this.handleOnSort.bind(this, "DESC")}>Eldest</a>
+                <a href="#" onClick={this.handleOnSort.bind(this, "DESC")}>Newest</a>
+              </li>
+              <li className={`${ this.activeFilter("ASC") }`}>
+                <a href="#" onClick={this.handleOnSort.bind(this, "ASC")}>Eldest</a>
               </li>
             </ul>
           </div>
