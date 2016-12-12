@@ -34,7 +34,16 @@ class PostPage extends React.Component {
       <div>
         { post &&
           <div>
-            <Post link={false} key={post.id} id={post.id} username={post.username} title={post.title} body={post.body} removePost={this.props.onRemovePost} />
+            <Post link={false}
+                  key={post.id}
+                  id={post.id}
+                  username={post.username}
+                  title={post.title}
+                  body={post.body}
+                  image={post.image}
+                  createdAt={post.created_at}
+                  removePost={this.props.onRemovePost} />
+
             <Link to="/">Back</Link>
           </div>
         }
