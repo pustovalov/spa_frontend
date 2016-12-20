@@ -4,7 +4,7 @@ import serialize from 'form-serialize'
 
 import * as AuthActions from '../actions/AuthActions.js'
 
-class LoginPage extends React.Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -12,25 +12,29 @@ class LoginPage extends React.Component {
     }
 
     this.handleChangeInput = this.handleChangeInput.bind(this)
-    this.handleLogin = this.handleLogin.bind(this)
+    this.handleSignUp = this.handleSignUp.bind(this)
   }
 
   handleChangeInput () {
     this.props.startType()
+    let email = this.refs.email.value.trim()
+    let password = this.refs.password.value.trim()
+    let name = this.refs.name.value.trim()
 
     let allowed = false
-    if (this.refs.email.value.trim() && this.refs.password.value.trim() ) {
+    if (email && password && name ) {
       allowed = true
     }
     this.setState({submitAllowed: allowed})
   }
 
-  handleLogin (e) {
+  handleSignUp (e) {
     e.preventDefault()
     let email = this.refs.email.value.trim()
     let password = this.refs.password.value.trim()
+    let name = this.refs.name.value.trim()
 
-    if (!password || !email) {
+    if (!password || !email || !name) {
       return
     }
 
@@ -38,14 +42,14 @@ class LoginPage extends React.Component {
     let formData = { auth }
 
     let obj = JSON.stringify(formData)
-    this.props.login(obj)
+    this.props.signUp(obj)
   }
 
   render() {
     const { errorMessage } = this.props
 
     return (
-      <form className="form-signin" ref="form" onSubmit={this.handleLogin}>
+      <form className="form-signin" onSubmit={this.handleSignUp}>
         <input className="form-control middle"
                type="email"
                placeholder="Email adress"
@@ -53,27 +57,33 @@ class LoginPage extends React.Component {
                name="email"
                onChange={this.handleChangeInput} />
 
+        <input className="form-control middle"
+               type="text"
+               placeholder="Name"
+               ref="name"
+               name="name"
+               onChange={this.handleChangeInput} />
+
         <input className="form-control last"
                type="password"
                placeholder="Password"
-               name="password"
                ref="password"
+               name="password"
                onChange={this.handleChangeInput} />
 
-        <button
-          className={ "btn btn-lg btn-primary btn-block" + (this.state.submitAllowed ? '' : ' disabled') }
-          type="submit">
-           Sign in
-        </button>
+       <button
+         className={ "btn btn-lg btn-primary btn-block" + (this.state.submitAllowed ? '' : ' disabled') }
+         type="submit">
+          Sign up
+       </button>
 
-        {do {
-          if (errorMessage) {
-            <div className="alert alert-danger text-center">
-              {errorMessage}
-            </div>
-          }
-        }}
-
+       {do {
+         if (errorMessage) {
+           <div className="alert alert-danger text-center">
+             {errorMessage}
+           </div>
+         }
+       }}
 
       </form>
     )
@@ -81,7 +91,7 @@ class LoginPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: (data) => dispatch(AuthActions.loginUser(data)),
+  signUp: (data) => dispatch(AuthActions.signUpUser(data)),
   startType: () => dispatch(AuthActions.loginStartType())
 })
 
@@ -90,4 +100,4 @@ const mapStateToProps = state => ({
   errorMessage: state.authReducer.errorMessage
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)

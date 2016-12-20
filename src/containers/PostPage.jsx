@@ -32,24 +32,29 @@ class PostPage extends React.Component {
     const post = this.postExist(this.props.params.id, this.props.posts)
     return (
       <div>
-        { post &&
-          <div>
-            <Post link={false}
-                  key={post.id}
-                  id={post.id}
-                  username={post.username}
-                  title={post.title}
-                  body={post.body}
-                  image={post.image}
-                  createdAt={post.created_at}
-                  removePost={this.props.onRemovePost} />
+        {do {
+          if (post) {
+            <div>
+              <Post link={false}
+                    key={post.id}
+                    id={post.id}
+                    username={post.username}
+                    title={post.title}
+                    body={post.body}
+                    image={post.image}
+                    createdAt={post.created_at}
+                    removePost={this.props.onRemovePost} />
 
-            <Link to="/">Back</Link>
-          </div>
-        }
-        { !post &&
-          <NotFound />
-        }
+              <Link to="/">Back</Link>
+            </div>
+          }
+        }}
+
+        {do {
+          if (!post) {
+            <NotFound />
+          }
+        }}
       </div>
     )
   }

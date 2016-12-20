@@ -97,18 +97,21 @@ class PostsPage extends Component {
           })
         }
 
-        {
-          !this.props.posts.length &&
-          <h3>
-            Not found
-          </h3>
-        }
+        {do {
+          if (!this.props.posts.length) {
+            <h3>
+              Not found
+            </h3>
+          }
+        }}
 
-        {this.props.meta &&
-          <PaginatorSection onPaginate={this.handleOnPaginate}
-                            totalPages={this.props.meta.total_pages}
-                            currentPage={this.props.meta.current_page} />
-        }
+        {do {
+          if (this.props.meta) {
+            <PaginatorSection onPaginate={this.handleOnPaginate}
+                              totalPages={this.props.meta.total_pages}
+                              currentPage={this.props.meta.current_page} />
+          }
+        }}
       </div>
     )
   }

@@ -1,4 +1,13 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": ["transform-runtime"]
+  "plugins": [
+    "transform-runtime",
+    "transform-do-expressions",
+    [
+      "react-intl", {
+        "messagesDir": "./build/messages",
+        "enforceDescriptions": false
+      }
+    ]
+  ]
 }

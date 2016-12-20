@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-import { logoutUser } from '../actions/LoginActions.js'
+import { logoutUser } from '../actions/AuthActions.js'
 
 export default class PostForm extends Component {
   constructor(props) {
@@ -45,6 +45,9 @@ export default class PostForm extends Component {
               <ul className="nav navbar-nav navbar-right">
                 <li>
                   <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/sign_up">Sign up</Link>
                 </li>
               </ul>
             }
