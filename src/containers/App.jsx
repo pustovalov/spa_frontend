@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Navbar from '../components/Navbar.jsx'
+import Navbar from 'Navbar'
 
-require('../css/app.scss')
+require('AppCSS')
 
 class App extends Component {
   render() {

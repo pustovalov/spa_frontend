@@ -28,7 +28,6 @@ deploy:
     repo: pustovalov/spa_frontend
     branch: master
 
-
 # after_deploy:
   # - aws configure set preview.cloudfront true
   # - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"

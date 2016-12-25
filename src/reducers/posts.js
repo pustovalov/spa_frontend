@@ -1,4 +1,4 @@
-import * as types from '../constants/PostTypes'
+import * as types from 'PostTypes'
 
 const initialPostState = {
   posts: [],

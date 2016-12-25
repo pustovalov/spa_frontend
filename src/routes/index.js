@@ -1,12 +1,14 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import App from '../containers/App.jsx'
-import PostsPage from '../containers/PostsPage.jsx'
-import PostPage from '../containers/PostPage.jsx'
-import LoginPage from '../containers/LoginPage.jsx'
-import SignUpPage from '../containers/SignUpPage.jsx'
-import AdminPage from '../containers/AdminPage.jsx'
-import NotFound from '../components/NotFound.jsx'
+import App from 'App'
+import PostsPage from 'PostsPage'
+import PostPage from 'PostPage'
+import LoginPage from 'LoginPage'
+import SignUpPage from 'SignUpPage'
+import AdminPage from 'AdminPage'
+import SettingsPage from 'SettingsPage'
+import NotFound from 'NotFound'
+
 
 export default (
   <Router history={browserHistory}>
@@ -17,6 +19,7 @@ export default (
       <Route path="/login" component={LoginPage} />
       <Route path="/sign_up" component={SignUpPage} />
       <Route path="/admin" component={AdminPage} />
+      <Route path="/settings" component={SettingsPage} />
     </Route>
     <Route path="*" component={NotFound} />
   </Router>

@@ -1,4 +1,4 @@
-import * as types from '../constants/PostTypes'
+import * as types from 'PostTypes'
 import { generateParams } from '../helpers'
 
 const BASE_URL = process.env.BASE_URL

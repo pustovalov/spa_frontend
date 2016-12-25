@@ -1,4 +1,4 @@
-import * as types from '../constants/AuthTypes'
+import * as types from 'AuthTypes'
 import { browserHistory } from 'react-router'
 
 const BASE_URL = process.env.BASE_URL
@@ -41,7 +41,7 @@ const generateAuthCreds = creds => {
   return config
 }
 
-const successfulAuth = (response, dispatch) => {
+const successfulAuth = (response) => dispatch => {
   let user = {
     name: response.user.name,
     email: response.user.email,
@@ -53,7 +53,7 @@ const successfulAuth = (response, dispatch) => {
   browserHistory.push('/')
 }
 
-const makeAuthRequest = (url, creds, dispatch) => {
+const makeAuthRequest = (url, creds) => dispatch => {
   let config = generateAuthCreds(creds)
 
   dispatch(requestLogin(creds))
@@ -62,7 +62,7 @@ const makeAuthRequest = (url, creds, dispatch) => {
     .then(response => response.json())
     .then(response =>  {
       if (response.ok) {
-        successfulAuth(response, dispatch)
+        dispatch(successfulAuth(response))
       } else {
         dispatch(loginError(response.message))
       }
@@ -70,11 +70,11 @@ const makeAuthRequest = (url, creds, dispatch) => {
 }
 
 export const loginUser = creds => dispatch => {
-  makeAuthRequest('user_token', creds, dispatch)
+  dispatch(makeAuthRequest('user_token', creds))
 }
 
 export const signUpUser = creds => dispatch => {
-  makeAuthRequest('sign_up', creds, dispatch)
+  dispatch(makeAuthRequest('sign_up', creds))
 }
 
 const requestLogout = () => ({

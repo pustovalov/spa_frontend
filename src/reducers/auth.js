@@ -1,4 +1,4 @@
-import * as types from '../constants/AuthTypes'
+import * as types from 'AuthTypes'
 
 let user = JSON.parse(localStorage.getItem('user')) || {}
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, browserHistory } from 'react-router'
-import * as PostActions from '../actions/PostActions.js'
-import NotFound from '../components/NotFound.jsx'
-import Post from '../components/Post.jsx'
+import * as PostActions from 'PostActions'
+import NotFound from 'NotFound'
+import Post from 'Post'
 
 function mapStateToProps(state) {
   return {

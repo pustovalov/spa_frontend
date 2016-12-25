@@ -4,6 +4,9 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -28,6 +31,7 @@
     "eol-last": 0,
     "jsx-quotes": 1,
     "no-unused-vars": 0,
+    "no-debugger": 0,
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Post from '../components/Post.jsx'
-import PostForm from '../components/PostForm.jsx'
-import PaginatorSection from '../components/PaginatorSection.jsx'
+import Post from 'Post'
+import PostForm from 'PostForm'
+import PaginatorSection from 'PaginatorSection'
 
-import * as PostActions from '../actions/PostActions.js'
+import * as PostActions from 'PostActions'
 
 const mapDispatchToProps = {
   onAddPost: PostActions.addPost,

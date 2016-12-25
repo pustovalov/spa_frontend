@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-import { logoutUser } from '../actions/AuthActions.js'
+import { logoutUser } from 'AuthActions'
 
 export default class PostForm extends Component {
   constructor(props) {
@@ -32,6 +32,9 @@ export default class PostForm extends Component {
                   <p className="navbar-text">
                     Name: { userName }
                   </p>
+                </li>
+                <li>
+                  <Link to="/settings">Settings</Link>
                 </li>
                 <li>
                   <button onClick={() => dispatch(logoutUser())} className="btn btn-default navbar-btn">

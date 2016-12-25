@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const aliases = require('./aliases')
 
 module.exports = {
   // cheap-module-source-map - for production
@@ -26,6 +27,11 @@ module.exports = {
      }
     })
   ],
+  resolve: {
+    root: path.resolve(__dirname, './src'),
+    alias: aliases,
+    extensions: ['', '.js', '.jsx', '.css', '.scss']
+  },
   module: {
     preLoaders: [
       {
@@ -44,6 +50,9 @@ module.exports = {
         ],
         test: /\.jsx$/
       },
+      {
+        test: /\.css$/,
+        loader: "style!css" },
       {
         test: /\.scss$/,
         loaders: ['style', 'css', 'sass']

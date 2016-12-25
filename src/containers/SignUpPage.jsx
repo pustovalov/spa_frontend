@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import serialize from 'form-serialize'
+import ErrorMessage from 'ErrorMessage'
 
-import * as AuthActions from '../actions/AuthActions.js'
+import * as AuthActions from 'AuthActions'
 
 class Signup extends React.Component {
   constructor(props) {
@@ -79,9 +80,7 @@ class Signup extends React.Component {
 
        {do {
          if (errorMessage) {
-           <div className="alert alert-danger text-center">
-             {errorMessage}
-           </div>
+           <ErrorMessage messages={errorMessage}/>
          }
        }}
 
