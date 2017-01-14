@@ -5,6 +5,9 @@ import Post from 'Post'
 import PostForm from 'PostForm'
 import PaginatorSection from 'PaginatorSection'
 
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
+import { translations } from 'Translations'
+
 import * as PostActions from 'PostActions'
 
 const mapDispatchToProps = {
@@ -59,6 +62,8 @@ class PostsPage extends Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl
+
     return(
       <div>
         <PostForm addPost={this.props.onAddPost.bind(this)} />
@@ -67,17 +72,29 @@ class PostsPage extends Component {
           <div className="container-fluid">
             <form className="navbar-form navbar-left" onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <input className="form-control" ref="search" placeholder="Search by Title" />
+                <input className="form-control" ref="search" placeholder={formatMessage(translations.placeholder_search_by_title)} />
               </div>
-              <button type="submit" className="ml-1 btn btn-default">Submit</button>
+              <button type="submit" className="ml-1 btn btn-default">
+                <FormattedMessage
+                  {...translations.submit}
+                />
+              </button>
             </form>
 
             <ul className="nav navbar-nav">
               <li className={`${ this.activeFilter("DESC") }`}>
-                <a href="#" onClick={this.handleOnSort.bind(this, "DESC")}>Newest</a>
+                <a href="#" onClick={this.handleOnSort.bind(this, "DESC")}>
+                  <FormattedMessage
+                    {...translations.newest}
+                  />
+                </a>
               </li>
               <li className={`${ this.activeFilter("ASC") }`}>
-                <a href="#" onClick={this.handleOnSort.bind(this, "ASC")}>Eldest</a>
+                <a href="#" onClick={this.handleOnSort.bind(this, "ASC")}>
+                  <FormattedMessage
+                    {...translations.eldest}
+                  />
+                </a>
               </li>
             </ul>
           </div>
@@ -117,4 +134,8 @@ class PostsPage extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostsPage)
+PostsPage.propTypes = {
+  intl: intlShape.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(PostsPage))

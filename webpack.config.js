@@ -58,6 +58,10 @@ module.exports = {
         loaders: ['style', 'css', 'sass']
       },
       {
+        test: /\.json$/,
+        loaders: ['json']
+      },
+      {
         test: /\.jsx?$/,
         include: [
           path.resolve(__dirname, 'src')

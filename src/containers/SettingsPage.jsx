@@ -3,11 +3,19 @@ import { connect } from 'react-redux'
 import serialize from 'form-serialize'
 import ErrorMessage from 'ErrorMessage'
 import Select from 'react-select'
+import { FormattedMessage, defineMessages } from 'react-intl'
 
-import * as SettingsActions from 'SettingsActions'
+import * as UserActions from 'UserActions'
 
 // styles
 require('ReactSelect')
+
+const translations = defineMessages({
+  predefinedTranslation: {
+    id: 'hey',
+    defaultMessage: 'Hello I am predefined'
+  }
+})
 
 class SettingsPage extends React.Component {
   constructor(props) {
@@ -24,8 +32,7 @@ class SettingsPage extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
 
-    let params = serialize(e.target, { hash: true })
-    let formData = { params }
+    let formData = serialize(e.target, { hash: true })
 
     this.props.saveChanges(formData)
   }
@@ -101,20 +108,20 @@ class SettingsPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  startType: () => dispatch(SettingsActions.startType()),
-  changeLocale: (locale) => dispatch(SettingsActions.changeLocale(locale)),
-  fetchData: () => dispatch(SettingsActions.fetchData()),
-  saveChanges: (obj) => dispatch(SettingsActions.saveChanges(obj))
+  startType: () => dispatch(UserActions.startType()),
+  changeLocale: (locale) => dispatch(UserActions.changeLocale(locale)),
+  fetchData: () => dispatch(UserActions.fetchSettingsData()),
+  saveChanges: (obj) => dispatch(UserActions.saveChanges(obj))
 })
 
 
 const mapStateToProps = state => {
-  let settingsReducer = state.settingsReducer
+  let userReducer = state.userReducer
   return {
-    errorMessage: settingsReducer.errorMessage,
-    userName: settingsReducer.userName,
-    availableLocales: settingsReducer.availableLocales,
-    userLocale: settingsReducer.userLocale
+    errorMessage: userReducer.errorMessage,
+    userName: userReducer.userName,
+    availableLocales: userReducer.availableLocales,
+    userLocale: userReducer.userLocale
   }
 }
 

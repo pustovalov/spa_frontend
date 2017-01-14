@@ -5,6 +5,9 @@ import * as PostActions from 'PostActions'
 import NotFound from 'NotFound'
 import Post from 'Post'
 
+import { FormattedMessage } from 'react-intl'
+import { translations } from 'Translations'
+
 function mapStateToProps(state) {
   return {
     posts: state.postReducer.posts
@@ -45,7 +48,11 @@ class PostPage extends React.Component {
                     createdAt={post.created_at}
                     removePost={this.props.onRemovePost} />
 
-              <Link to="/">Back</Link>
+              <Link to="/">
+                <FormattedMessage
+                  {...translations.back}
+                />
+              </Link>
             </div>
           }
         }}

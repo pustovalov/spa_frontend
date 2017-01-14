@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import serialize from 'form-serialize'
 import ErrorMessage from 'ErrorMessage'
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
+import { translations } from 'Translations'
 
-import * as AuthActions from 'AuthActions'
+import * as UserActions from 'UserActions'
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -38,25 +40,25 @@ class LoginPage extends React.Component {
     let auth = serialize(e.target, { hash: true })
     let formData = { auth }
 
-    let obj = JSON.stringify(formData)
-    this.props.login(obj)
+    this.props.login(formData)
   }
 
   render() {
     const { errorMessage } = this.props
+    const { formatMessage } = this.props.intl
 
     return (
       <form className="form-signin" ref="form" onSubmit={this.handleLogin}>
         <input className="form-control middle"
                type="email"
-               placeholder="Email adress"
+               placeholder={formatMessage(translations.placeholder_email)}
                ref="email"
                name="email"
                onChange={this.handleChangeInput} />
 
         <input className="form-control last"
                type="password"
-               placeholder="Password"
+               placeholder={formatMessage(translations.placeholder_password)}
                name="password"
                ref="password"
                onChange={this.handleChangeInput} />
@@ -64,7 +66,9 @@ class LoginPage extends React.Component {
         <button
           className={ "btn btn-lg btn-primary btn-block" + (this.state.submitAllowed ? '' : ' disabled') }
           type="submit">
-           Sign in
+            <FormattedMessage
+              {...translations.sign_in}
+            />
         </button>
 
         {do {
@@ -73,20 +77,22 @@ class LoginPage extends React.Component {
           }
         }}
 
-
       </form>
     )
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: (data) => dispatch(AuthActions.loginUser(data)),
-  startType: () => dispatch(AuthActions.loginStartType())
+  login: (data) => dispatch(UserActions.loginUser(data)),
+  startType: () => dispatch(UserActions.startType())
 })
-
 
 const mapStateToProps = state => ({
-  errorMessage: state.authReducer.errorMessage
+  errorMessage: state.userReducer.errorMessage
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+LoginPage.propTypes = {
+  intl: intlShape.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(LoginPage))

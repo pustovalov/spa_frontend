@@ -1,0 +1,13 @@
+{
+  "sourceBase":"src",
+  "testBase":"tests",
+  "smartPath":"containers",
+  "dumbPath":"components",
+  "fileCasing":"default",
+
+  "containersPath":"containers",
+  "actionsPath":"actions",
+  "constantsPath":"constants",
+  "componentsPath":"components",
+  "reducersPath": "reducers"
+}

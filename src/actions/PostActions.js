@@ -1,5 +1,5 @@
 import * as types from 'PostTypes'
-import { generateParams } from '../helpers'
+import $ from 'jquery'
 
 const BASE_URL = process.env.BASE_URL
 const NUMBER_PER_PARE = 3
@@ -37,33 +37,48 @@ export const searchPosts = query => (dispatch, getState) => {
   dispatch(fetchPosts())
 }
 
+const setHeaders = (jwt) => {
+  return {
+    'Content-Type':'application/json',
+    ...jwt && {'authorization': `Bearer ${jwt}`}
+  }
+}
+
 export const fetchPosts = () => (dispatch, getState) => {
 
   let state = getState().postReducer
+  let jwt = getState().userReducer.jwt
+
   let options = {
     order: state.order,
     page: state.page,
     per: state.per,
     search: state.search
   }
-  let params = generateParams(options)
 
-  return fetch(`${BASE_URL}/api/posts?${params}`)
-    .then(response => response.json())
-    .then(response => dispatch(receivePosts(response)))
+  $.ajax({
+    method: 'GET',
+    url: `${BASE_URL}/api/posts`,
+    headers: setHeaders(jwt),
+    data: options
+  })
+    .done(response => {
+      if (response.ok) {
+        dispatch(receivePosts(response))
+      }
+    })
 }
 
 export const addPost = data => dispatch => {
-  fetch(`${BASE_URL}/api/posts`, {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: data
-    })
-    .then(response => response.json())
-    .then(response => {
+  let jwt = getState().userReducer.jwt
+
+  $.ajax({
+    method: 'POST',
+    url: `${BASE_URL}/api/posts`,
+    headers: setHeaders(jwt),
+    data: data
+  })
+    .done(response => {
       if (response.ok) {
         dispatch(fetchPosts())
       }
@@ -71,14 +86,14 @@ export const addPost = data => dispatch => {
 }
 
 export const removePost = id => dispatch => {
-  fetch(`${BASE_URL}/api/posts/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then(response => {
+  let jwt = getState().userReducer.jwt
+
+  $.ajax({
+    url: `${BASE_URL}/api/posts/${id}`,
+    type: 'DELETE',
+    headers: setHeaders(jwt),
+  })
+    .done(response => {
       if (response.ok) {
         dispatch(fetchPosts())
       }

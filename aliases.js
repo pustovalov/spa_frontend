@@ -18,14 +18,18 @@ const aliases = {
   PaginatorLink: 'components/PaginatorLink',
 
   // actions
-  AuthActions: 'actions/AuthActions',
+  UserActions: 'actions/UserActions',
   PostActions: 'actions/PostActions',
   SettingsActions: 'actions/SettingsActions',
 
   // constants
-  AuthTypes: 'constants/AuthTypes',
+  UserTypes: 'constants/UserTypes',
   PostTypes: 'constants/PostTypes',
   SettingsTypes: 'constants/SettingsTypes',
+
+  //translations
+
+  Translations: 'l10n/translations',
 
   //styles
   AppCSS: 'css/app',
