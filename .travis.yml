@@ -15,7 +15,7 @@ before_install:
   # - pip install awscli
 
 before_deploy:
-  - yarn prod
+  - yarn prod-d
 
 deploy:
   provider: s3
