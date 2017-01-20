@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Navbar from '../components/Navbar.jsx'
+import Navbar from 'Navbar'
 
-require('../css/app.scss')
+require('AppCSS')
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
           isAdmin={isAdmin}
           userName={userName}
           dispatch={dispatch} />
-
+        
         <div className="container">
           {this.props.children}
         </div>
@@ -24,9 +24,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  userName: state.authReducer.userName,
-  isAdmin: state.authReducer.isAdmin,
-  isAuthenticated: state.authReducer.isAuthenticated
+  userName: state.userReducer.userName,
+  isAdmin: state.userReducer.isAdmin,
+  isAuthenticated: state.userReducer.isAuthenticated
 })
 
 export default connect(mapStateToProps)(App)

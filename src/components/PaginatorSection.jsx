@@ -1,7 +1,7 @@
 import React from 'react'
 import _ from 'lodash/util'
 
-import PaginatorLink from '../components/PaginatorLink.jsx'
+import PaginatorLink from 'PaginatorLink'
 
 export default class PaginatorSection extends React.Component {
   constructor(props) {

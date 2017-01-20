@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import { formatDate } from '../helpers'
+import { FormattedMessage } from 'react-intl'
+import { translations } from 'Translations'
 
 export default class Post extends Component {
   constructor(props) {
@@ -13,12 +15,18 @@ export default class Post extends Component {
         { this.props.link ?
           <h3>
             <Link to={"/posts/" + this.props.id}>
-              Title: { this.props.title }
+              <FormattedMessage
+                {...translations.title}
+              />
+              : { this.props.title }
             </Link>
           </h3>
         :
           <h3>
-            Title: { this.props.title }
+            <FormattedMessage
+              {...translations.title}
+            />
+            : { this.props.title }
           </h3>
         }
         {this.props.image.url &&
@@ -27,15 +35,28 @@ export default class Post extends Component {
           </div>
         }
         <p>
-          Username: { this.props.username }
+          <FormattedMessage
+            {...translations.user_name}
+          />
+          : { this.props.username }
         </p>
         <p>
-          Body: { this.props.body }
+          <FormattedMessage
+            {...translations.body}
+          />
+          : { this.props.body }
         </p>
         <p>
-          Created at: { formatDate(this.props.createdAt) }
+          <FormattedMessage
+            {...translations.created_at}
+          />
+          : { formatDate(this.props.createdAt) }
         </p>
-        <button onClick={() => this.props.removePost(this.props.id)} className="btn btn-default">Remove</button>
+        <button onClick={() => this.props.removePost(this.props.id)} className="btn btn-default">
+          <FormattedMessage
+            {...translations.remove}
+          />
+        </button>
         <br />
         <br />
       </div>

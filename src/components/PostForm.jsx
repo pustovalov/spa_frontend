@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
+import { translations } from 'Translations'
 
-export default class PostForm extends Component {
+class PostForm extends Component {
   constructor(props) {
     super(props)
     this.state = {username: '', title: '', body: '', image: '', submitAllowed: false}
@@ -55,32 +57,38 @@ export default class PostForm extends Component {
   }
 
   render() {
+    const {formatMessage} = this.props.intl;
+
     return(
       <div className="row">
         <div className="col-md-3">
 
-          <h3>Add new comment</h3>
+          <h3>
+            <FormattedMessage
+              {...translations.add_new_comment}
+            />
+          </h3>
 
           <form className="commentForm" onSubmit={this.handleSubmit}>
 
             <div className="form-group">
               <input className="form-control"
                      type="text"
-                     placeholder="Your username"
+                     placeholder={formatMessage(translations.placeholder_user_name)}
                      ref="username"
                      onChange={this.handleChangeInput} />
             </div>
             <div className="form-group">
               <input type="text"
                      className="form-control"
-                     placeholder="Title"
+                     placeholder={formatMessage(translations.placeholder_title)}
                      ref="title"
                      onChange={this.handleChangeInput} />
             </div>
             <div className="form-group">
               <input type="text"
                      className="form-control"
-                     placeholder="Body"
+                     placeholder={formatMessage(translations.placeholder_body)}
                      ref="body"
                      onChange={this.handleChangeInput} />
             </div>
@@ -91,10 +99,16 @@ export default class PostForm extends Component {
                      accept="image/*"
                      onChange={this.handleChangeImage} />
             </div>
-            <input type="submit" className={ "btn btn-default" + (this.state.submitAllowed ? '' : ' disabled') } value="Add comment" />
+            <input type="submit" className={ "btn btn-default" + (this.state.submitAllowed ? '' : ' disabled') } value={formatMessage(translations.add_comment)} />
           </form>
         </div>
       </div>
     )
   }
 }
+
+PostForm.propTypes = {
+  intl: intlShape.isRequired
+}
+
+export default injectIntl(PostForm)

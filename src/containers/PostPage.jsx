@@ -1,9 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link, browserHistory } from 'react-router'
-import * as PostActions from '../actions/PostActions.js'
-import NotFound from '../components/NotFound.jsx'
-import Post from '../components/Post.jsx'
+import * as PostActions from 'PostActions'
+import NotFound from 'NotFound'
+import Post from 'Post'
+
+import { FormattedMessage } from 'react-intl'
+import { translations } from 'Translations'
 
 function mapStateToProps(state) {
   return {
@@ -32,24 +35,33 @@ class PostPage extends React.Component {
     const post = this.postExist(this.props.params.id, this.props.posts)
     return (
       <div>
-        { post &&
-          <div>
-            <Post link={false}
-                  key={post.id}
-                  id={post.id}
-                  username={post.username}
-                  title={post.title}
-                  body={post.body}
-                  image={post.image}
-                  createdAt={post.created_at}
-                  removePost={this.props.onRemovePost} />
+        {do {
+          if (post) {
+            <div>
+              <Post link={false}
+                    key={post.id}
+                    id={post.id}
+                    username={post.username}
+                    title={post.title}
+                    body={post.body}
+                    image={post.image}
+                    createdAt={post.created_at}
+                    removePost={this.props.onRemovePost} />
 
-            <Link to="/">Back</Link>
-          </div>
-        }
-        { !post &&
-          <NotFound />
-        }
+              <Link to="/">
+                <FormattedMessage
+                  {...translations.back}
+                />
+              </Link>
+            </div>
+          }
+        }}
+
+        {do {
+          if (!post) {
+            <NotFound />
+          }
+        }}
       </div>
     )
   }

@@ -7,20 +7,20 @@
     padding: 10px;
     font-size: 16px;
     height: auto;
+
+    &.last {
+      margin-bottom: 10px;
+    }
   }
 
-  .first {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+  .middle {
+    position: relative;
+    bottom: -1px;
+    border-radius: 0;
   }
 
-  .second {
+  .last {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-  }
-
-  button {
-    margin: 20px 0;
   }
 }

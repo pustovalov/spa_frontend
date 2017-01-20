@@ -1,7 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import serialize from 'form-serialize'
+import ErrorMessage from 'ErrorMessage'
+import { FormattedMessage, intlShape, injectIntl } from 'react-intl'
+import { translations } from 'Translations'
 
-import * as LoginActions from '../actions/LoginActions.js'
+import * as UserActions from 'UserActions'
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -11,7 +15,7 @@ class LoginPage extends React.Component {
     }
 
     this.handleChangeInput = this.handleChangeInput.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   handleChangeInput () {
@@ -24,7 +28,7 @@ class LoginPage extends React.Component {
     this.setState({submitAllowed: allowed})
   }
 
-  handleSubmit (e) {
+  handleLogin (e) {
     e.preventDefault()
     let email = this.refs.email.value.trim()
     let password = this.refs.password.value.trim()
@@ -33,39 +37,45 @@ class LoginPage extends React.Component {
       return
     }
 
-    let data = {
-      auth: {
-        email: email,
-        password: password
-      }
-    }
+    let auth = serialize(e.target, { hash: true })
+    let formData = { auth }
 
-    let obj = JSON.stringify(data)
-    this.props.login(obj)
+    this.props.login(formData)
   }
 
   render() {
     const { errorMessage } = this.props
+    const { formatMessage } = this.props.intl
 
     return (
-      <form className="form-signin" onSubmit={this.handleSubmit}>
-        <input className="form-control first"
+      <form className="form-signin" ref="form" onSubmit={this.handleLogin}>
+        <input className="form-control middle"
                type="email"
-               placeholder="Email adress"
+               placeholder={formatMessage(translations.placeholder_email)}
                ref="email"
+               name="email"
                onChange={this.handleChangeInput} />
-        <input className="form-control second"
-              type="password"
-              placeholder="Password"
-              ref="password"
-              onChange={this.handleChangeInput} />
-       <button className={ "btn btn-lg btn-primary btn-block" + (this.state.submitAllowed ? '' : ' disabled') } type="submit">Sign in</button>
 
-       { errorMessage &&
-         <div className="alert alert-danger text-center">
-           {errorMessage}
-         </div>
-       }
+        <input className="form-control last"
+               type="password"
+               placeholder={formatMessage(translations.placeholder_password)}
+               name="password"
+               ref="password"
+               onChange={this.handleChangeInput} />
+
+        <button
+          className={ "btn btn-lg btn-primary btn-block" + (this.state.submitAllowed ? '' : ' disabled') }
+          type="submit">
+            <FormattedMessage
+              {...translations.sign_in}
+            />
+        </button>
+
+        {do {
+          if (errorMessage) {
+            <ErrorMessage messages={errorMessage}/>
+          }
+        }}
 
       </form>
     )
@@ -73,13 +83,16 @@ class LoginPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: (data) => dispatch(LoginActions.loginUser(data)),
-  startType: () => dispatch(LoginActions.loginStartType())
+  login: (data) => dispatch(UserActions.loginUser(data)),
+  startType: () => dispatch(UserActions.startType())
 })
-
 
 const mapStateToProps = state => ({
-  errorMessage: state.authReducer.errorMessage
+  errorMessage: state.userReducer.errorMessage
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+LoginPage.propTypes = {
+  intl: intlShape.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(LoginPage))
