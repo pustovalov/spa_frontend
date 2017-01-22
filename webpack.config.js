@@ -32,7 +32,7 @@ module.exports = {
       "node_modules"
     ],
     alias: aliases,
-    // extensions: ['', '.js', '.jsx', '.css', '.scss']
+    extensions: ['.js', '.jsx', '.css', '.scss']
   },
   module: {
     rules: [
@@ -47,7 +47,6 @@ module.exports = {
       {
         use: [
           'react-hot-loader'
-          // ,'jsx?harmony'
         ],
         include: [
           path.resolve(__dirname, 'src')
@@ -57,13 +56,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          "style",
-          "css"
+          "style-loader",
+          "css-loader"
         ]
       },
       {
         test: /\.scss$/,
-        use: ['style', 'css', 'sass']
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.jsx?$/,
