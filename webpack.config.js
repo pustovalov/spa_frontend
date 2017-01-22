@@ -6,7 +6,7 @@ module.exports = {
   // cheap-module-source-map - for production
   // cheap-module-eval-source-map - for development
   devtool: 'cheap-module-eval-source-map',
-  alias: { 'react/lib/ReactMount': 'react-dom/lib/ReactMount' }, // https://github.com/gaearon/react-hot-loader/issues/417#issuecomment-261548082
+  // alias: { 'react/lib/ReactMount': 'react-dom/lib/ReactMount' }, // https://github.com/gaearon/react-hot-loader/issues/417#issuecomment-261548082
   entry: [
     'webpack-hot-middleware/client',
     './src/index.jsx'
@@ -17,9 +17,8 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
      'process.env': {
        'BASE_URL': JSON.stringify('http://localhost:3000'),
@@ -28,23 +27,28 @@ module.exports = {
     })
   ],
   resolve: {
-    root: path.resolve(__dirname, './src'),
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules"
+    ],
     alias: aliases,
-    extensions: ['', '.js', '.jsx', '.css', '.scss']
+    // extensions: ['', '.js', '.jsx', '.css', '.scss']
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.jsx$/,
-        loaders: ['eslint'],
+        enforce: "pre",
+        loader: 'eslint-loader',
         include: [
           path.resolve(__dirname, 'src')
         ]
-      }
-    ],
-    loaders: [
+      },
       {
-        loaders: ['react-hot', 'jsx?harmony'],
+        use: [
+          'react-hot-loader'
+          // ,'jsx?harmony'
+        ],
         include: [
           path.resolve(__dirname, 'src')
         ],
@@ -52,14 +56,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: "style!css" },
-      {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        use: [
+          "style",
+          "css"
+        ]
       },
       {
-        test: /\.json$/,
-        loaders: ['json']
+        test: /\.scss$/,
+        use: ['style', 'css', 'sass']
       },
       {
         test: /\.jsx?$/,
