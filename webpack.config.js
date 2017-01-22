@@ -3,10 +3,7 @@ const webpack = require('webpack')
 const aliases = require('./aliases')
 
 module.exports = {
-  // cheap-module-source-map - for production
-  // cheap-module-eval-source-map - for development
   devtool: 'cheap-module-eval-source-map',
-  // alias: { 'react/lib/ReactMount': 'react-dom/lib/ReactMount' }, // https://github.com/gaearon/react-hot-loader/issues/417#issuecomment-261548082
   entry: [
     'webpack-hot-middleware/client',
     './src/index.jsx'

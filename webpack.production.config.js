@@ -26,30 +26,25 @@ module.exports = {
     })
   ],
   resolve: {
-    root: path.resolve(__dirname, './src'),
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules"
+    ],
     alias: aliases,
-    extensions: ['', '.js', '.jsx', '.css', '.scss']
+    extensions: ['.js', '.jsx', '.css', '.scss']
   },
   module: {
-    loaders: [
-      {
-        loaders: ['jsx?harmony'],
-        include: [
-          path.resolve(__dirname, 'src')
-        ],
-        test: /\.jsx$/
-      },
+    rules: [
       {
         test: /\.css$/,
-        loader: "style!css"
+        use: [
+          "style-loader",
+          "css-loader"
+        ]
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
-      },
-      {
-        test: /\.json$/,
-        loaders: ['json']
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.jsx?$/,
