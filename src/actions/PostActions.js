@@ -69,7 +69,7 @@ export const fetchPosts = () => (dispatch, getState) => {
     })
 }
 
-export const addPost = data => dispatch => {
+export const addPost = data => (dispatch, getState) => {
   let jwt = getState().userReducer.jwt
 
   $.ajax({
@@ -85,7 +85,7 @@ export const addPost = data => dispatch => {
     })
 }
 
-export const removePost = id => dispatch => {
+export const removePost = id => (dispatch, getState) => {
   let jwt = getState().userReducer.jwt
 
   $.ajax({
