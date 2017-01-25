@@ -42,12 +42,10 @@ export const startType = () => ({
 })
 
 const setHeaders = (jwt) => {
-  return Object.assign (
-    {
-      'Content-Type':'application/json'
-    },
-    jwt && {'authorization': `Bearer ${jwt}`}
-  )
+  return {
+    'Content-Type':'application/json',
+    ...jwt && {'authorization': `Bearer ${jwt}`}
+  }
 }
 
 const successfulAuth = (response) => dispatch => {
