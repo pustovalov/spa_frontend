@@ -99,7 +99,7 @@ class PostForm extends Component {
                      accept="image/*"
                      onChange={this.handleChangeImage} />
             </div>
-            <input type="submit" className={ "btn btn-default" + (this.state.submitAllowed ? '' : ' disabled') } value={formatMessage(translations.add_comment)} />
+            <input type="submit" className={ "btn btn-default ac-submit" + (this.state.submitAllowed ? '' : ' disabled') } value={formatMessage(translations.add_comment)} />
           </form>
         </div>
       </div>

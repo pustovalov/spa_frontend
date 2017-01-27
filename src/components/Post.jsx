@@ -13,7 +13,7 @@ export default class Post extends Component {
     return(
       <div key={this.props.id}>
         { this.props.link ?
-          <h3>
+          <h3 className="ac-title">
             <Link to={"/posts/" + this.props.id}>
               <FormattedMessage
                 {...translations.title}
@@ -22,7 +22,7 @@ export default class Post extends Component {
             </Link>
           </h3>
         :
-          <h3>
+          <h3 className="ac-title">
             <FormattedMessage
               {...translations.title}
             />
@@ -34,25 +34,25 @@ export default class Post extends Component {
             <img src={this.props.image.thumb.url} />
           </div>
         }
-        <p>
+        <p className="ac-user-name">
           <FormattedMessage
             {...translations.user_name}
           />
           : { this.props.username }
         </p>
-        <p>
+        <p className="ac-body">
           <FormattedMessage
             {...translations.body}
           />
           : { this.props.body }
         </p>
-        <p>
+        <p className="ac-date">
           <FormattedMessage
             {...translations.created_at}
           />
           : { formatDate(this.props.createdAt) }
         </p>
-        <button onClick={() => this.props.removePost(this.props.id)} className="btn btn-default">
+        <button onClick={() => this.props.removePost(this.props.id)} className="btn ac-remove btn-default">
           <FormattedMessage
             {...translations.remove}
           />
