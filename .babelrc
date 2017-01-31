@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015", "react"],
+  "presets": ["es2015", "react", "stage-3"],
   "plugins": [
     "transform-runtime",
     "transform-do-expressions",
@@ -8,6 +8,42 @@
         "messagesDir": "./build/messages",
         "enforceDescriptions": false
       }
-    ]
+    ],
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "App": "containers/App",
+        "PostsPage": "containers/PostsPage",
+        "PostPage": "containers/PostPage",
+        "LoginPage": "containers/LoginPage",
+        "SignUpPage": "containers/SignUpPage",
+        "AdminPage": "containers/AdminPage",
+        "SettingsPage": "containers/SettingsPage",
+
+        "ErrorMessage": "components/ErrorMessage",
+        "Navbar": "components/Navbar",
+        "NotFound": "components/NotFound",
+        "Post": "components/Post",
+        "PostForm": "components/PostForm",
+        "PaginatorSection": "components/PaginatorSection",
+        "PaginatorLink": "components/PaginatorLink",
+
+        "UserActions": "actions/UserActions",
+        "PostActions": "actions/PostActions",
+        "SettingsActions": "actions/SettingsActions",
+
+        "UserTypes": "constants/UserTypes",
+        "PostTypes": "constants/PostTypes",
+        "SettingsTypes": "constants/SettingsTypes",
+
+
+        "Translations": "l10n/translations",
+
+        "AppCSS": "css/app",
+        "HelperesCss": "css/helpers",
+        "SignFormCSS": "css/sign_form",
+        "ReactSelect": "react-select/dist/react-select.css"
+      }
+    }]
   ]
 }

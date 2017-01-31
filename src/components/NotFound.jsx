@@ -6,7 +6,7 @@ import { translations } from 'Translations'
 export default class NotFound extends Component {
   render() {
     return (
-      <div>
+      <div className="ac-error-message">
         <FormattedMessage
           {...translations.page_not_found}
         />

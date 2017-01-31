@@ -69,7 +69,7 @@ class Navbar extends Component {
             }
 
             {!isAuthenticated &&
-              <ul className="nav navbar-nav navbar-right">
+              <ul className="nav navbar-nav navbar-right ac-language-dropdown">
                 <li className="dropdown">
                   <a data-target="#"
                      className="dropdown-toggle"
