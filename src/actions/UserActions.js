@@ -1,6 +1,7 @@
 import * as types from 'UserTypes'
 import { browserHistory } from 'react-router'
 import $ from 'jquery'
+import { setHeaders } from '../helpers'
 
 // const generateAuthCreds = creds => {
 //   let config = {
@@ -40,13 +41,6 @@ export const startType = () => ({
   type: types.USER_START_TYPE,
   errorMessage: ""
 })
-
-const setHeaders = (jwt) => {
-  return {
-    'Content-Type':'application/json',
-    ...jwt && {'authorization': `Bearer ${jwt}`}
-  }
-}
 
 const successfulAuth = (response) => dispatch => {
   localStorage.setItem('user', JSON.stringify(response.user))

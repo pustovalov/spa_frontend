@@ -1,5 +1,6 @@
 import * as types from 'PostTypes'
 import $ from 'jquery'
+import { setHeaders } from '../helpers'
 
 const BASE_URL = process.env.BASE_URL
 const NUMBER_PER_PARE = 3
@@ -35,13 +36,6 @@ export const searchPosts = query => (dispatch, getState) => {
   })
 
   dispatch(fetchPosts())
-}
-
-const setHeaders = (jwt) => {
-  return {
-    'Content-Type':'application/json',
-    ...jwt && {'authorization': `Bearer ${jwt}`}
-  }
 }
 
 export const fetchPosts = () => (dispatch, getState) => {

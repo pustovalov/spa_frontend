@@ -8,10 +8,22 @@ import * as UserActions from 'UserActions'
 class Navbar extends Component {
   constructor(props) {
     super(props)
+
+    this.handleChangeLangEn = this.handleChangeLangEn.bind(this)
+    this.handleChangeLangRu = this.handleChangeLangRu.bind(this)
   }
 
-  handleChangeLang(option, e) {
+  handleChangeLangEn(e) {
     e.preventDefault()
+    this.handleChangeLang("en")
+  }
+
+  handleChangeLangRu(e) {
+    e.preventDefault()
+    this.handleChangeLang("ru")
+  }
+
+  handleChangeLang(option) {
     this.props.changeLanguage(option)
   }
 
@@ -81,10 +93,10 @@ class Navbar extends Component {
                    </a>
                    <ul className="dropdown-menu" aria-labelledby="language">
                      <li>
-                       <a href="#" onClick={this.handleChangeLang.bind(this, "ru")}>RU</a>
+                       <a href="#" onClick={this.handleChangeLangRu}>RU</a>
                      </li>
                      <li>
-                       <a href="#" onClick={this.handleChangeLang.bind(this, "en")}>EN</a>
+                       <a href="#" onClick={this.handleChangeLangEn}>EN</a>
                      </li>
                    </ul>
                 </li>
