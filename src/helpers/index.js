@@ -11,3 +11,10 @@ export const generateParams = params => {
 export const formatDate = date => (
   moment(date).format('MMMM Do YYYY, h:mm:ss A')
 )
+
+export const setHeaders = (jwt) => {
+  return {
+    'Content-Type':'application/json',
+    ...jwt && {'authorization': `Bearer ${jwt}`}
+  }
+}
